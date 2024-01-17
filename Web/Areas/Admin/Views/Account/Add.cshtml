@@ -1,0 +1,131 @@
+﻿ 
+@using Web.Model
+@model Web.Model.tbl_User
+@{ 
+    var lstGroupUser = (List<GroupUser>)ViewBag.GroupUser;
+}
+@using (Html.AjaxBeginForm("Add", "Account", new AjaxOptions
+ {
+     HttpMethod = "POST",
+     OnSuccess = "account.onSaveResult"
+ },
+new { @id = "basicForm", @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên đăng nhập <span class="asterisk"> *</span></label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(g => g.UserName, new { @class = "form-control", placeholder = "Tên đăng nhập" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mật khẩu <span class="asterisk"> *</span></label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(g => g.Password, new {@class = "form-control", placeholder = "******" })
+            <i onclick="showPass()" style="margin-top:-23px;float: right;margin-right: 10px;cursor:pointer;color:#404040" class="fa fa-eye searchclear" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Điện thoại</label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(g => g.Phone, new {@class = "form-control", placeholder = "Điện thoại" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Họ và tên</label>
+        <div class="col-md-4">
+            @Html.TextBoxFor(g => g.FullName, new { @class = "form-control", placeholder = "Họ và tên" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(g => g.Email, new { @class = "form-control", placeholder = "Email" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Địa chỉ</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(g => g.Address, new { @class = "form-control", placeholder = "Địa chỉa" })
+        </div>
+    </div> 
+    <div class="form-group">
+        <div class="col-sm-10 pull-right">
+            <div class="checkbox checkbox-primary">
+                <input id="isAdmin" name="isAdmin" type="checkbox" value="true" onclick="checkFullRole(this)">
+                <label for="isAdmin">
+                    Quản trị tối cao
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="groupuser">
+        <label class="col-md-2 control-label">Nhóm người dùng <span class="asterisk"> *</span></label>
+        <div class="col-md-3">
+            @Html.DropDownListFor(x => x.GroupUserID, new SelectList(lstGroupUser, "ID", "Name"), "--- Chọn Nhóm ---", new { @class = "form-control" })
+        </div>
+    </div>  
+    <div class="form-group">
+        <div class="col-sm-10 pull-right">
+            <div class="checkbox checkbox-primary">
+                <input id="Active" name="Active" type="checkbox" checked="" value="true">
+                <label for="Active">
+                    Kích hoạt
+                </label>
+            </div>
+        </div>
+    </div> 
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Thêm mới</button>
+    </div>
+}
+<script>
+    function checkFullRole(ckb) {
+        $('#GroupUserID').val('')
+        if ($('#isAdmin').is(':checked')) {
+            $('#groupuser').css('display', 'none')
+        } else {
+            $('#groupuser').css('display', 'block')
+        }
+    }
+    function showPass() {
+        let pass = $('#Password');
+        let type = pass.attr('type');
+        if (type == 'text')
+            pass.get(0).type = 'password';
+        else
+            pass.get(0).type = 'text';
+    }
+    // Basic Form
+    $(document).ready(function () {
+        $("#basicForm").validate({
+            rules:
+            {
+                UserName:
+                {
+                    required: true
+                },
+                Password:
+                {
+                    required: true,
+                    minlength: 6,
+                }
+            },
+            messages:
+            {
+                UserName:
+                {
+                    required: "Chưa nhập tên đăng nhập"
+                },
+                Password:
+                {
+                    required: "Chưa nhập mật khẩu",
+                    minlength: "Mật khẩu tối thiểu 6 ký tự"
+                }
+            }
+        });
+        account.initcheckall();
+        $('#pagemanager').slimScroll({
+            height: '300px',
+        });
+    });
+</script>

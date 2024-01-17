@@ -1,0 +1,11 @@
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.ServiceImplement.deps.json
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.ServiceImplement.dll
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.ServiceImplement.pdb
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.GeneratedMSBuildEditorConfig.editorconfig
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.AssemblyInfoInputs.cache
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.AssemblyInfo.cs
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.csproj.CoreCompileInputs.cache
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.dll
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\refint\Web.ServiceImplement.dll
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.ServiceImplement.pdb
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\ref\Web.ServiceImplement.dll

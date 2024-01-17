@@ -1,0 +1,63 @@
+﻿ 
+@model List<Web.Model.GroupUser>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <input type="hidden" id="hdfID" />
+                <div class="checkbox">
+                    <input id="chkall" type="checkbox">
+                    <label for="chkall"></label>
+                </div>
+            </th>
+            <th>Tên nhóm</th>
+            <th>Trạng thái</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="vertical-align: middle;">
+                    <div class="checkbox">
+                        <input type="checkbox" value="@item.ID" id="chk'@item.ID'">
+                        <label for="chk'@item.ID'"></label>
+                    </div>
+                </td>
+                <td style="vertical-align: middle;">@item.Name</td>
+                <td style="vertical-align: middle;">@Html.Raw(item.Status == true ? "<span style='color:green'>Kích hoạt</span>" : "<span style='color:red'>Vô hiệu</span>")</td>
+                <td style="vertical-align: middle;">
+                    <div class="btn-list pull-right mr5">
+                        @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("GroupUser.Add")))
+                        {
+                            <a href="#" class="btn btn-info btn-bordered" onclick="groupuser.onloaduserindgroup(@item.ID, '@item.Name')" title="Thêm người dùng vào nhóm">
+                                <i class="md md-person-add"></i>
+                            </a>
+                        }
+                        @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("GroupUser.Edit")))
+                        {
+                            <a href="#" class="btn btn-success btn-bordered" onclick="groupuser.onloadpermission(@item.ID, '@item.Name')" title="Phân quyền cho nhóm">
+                                <i class="fa fa-wrench"></i>
+                            </a> 
+                            <a href="#" class="btn btn-primary btn-bordered" onclick="groupuser.loadfrmEdit(@item.ID)"><i class="glyphicon glyphicon-pencil" title="Sửa nhóm người dùng"></i></a>
+                        }
+                        @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("GroupUser.Edit")))
+                        {
+                            <a href="#" class="btn btn-danger btn-bordered" onclick="groupuser.ondelete(@item.ID)" title="Xóa nhóm người dùng">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        InitClickCheckAllInTable("chkall", function (res) {
+            $("#hdfID").val(res);
+        });
+    });
+</script>

@@ -1,0 +1,95 @@
+﻿@model List<AdminMenu>
+@{
+    ViewBag.Title = "Phân quyền người dùng"; 
+    var lstPermissions = (List<Permissions>)ViewBag.Permissions;
+    int index = 0;
+}
+@using Web.Core
+@using Web.Model;
+@using System.Linq;
+@using Web.Model.Enum;
+<input type="hidden" id="groupuserId" name="groupuserId" value="@ViewBag.GroupUserID" />
+<table class="table mb30" id="lstAdminmenu">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Tên chức năng</th>
+            <th>Chọn tất</th>
+            <th>Xem</th>
+            <th>Thêm</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+            <th>Duyệt</th>
+        </tr>
+    </thead>
+    <tbody> 
+        @foreach (var item in Model)
+        {
+            index++; 
+            List<string> lstAction = new List<string>();
+            var checkView = "";
+            var checkAdd = "";
+            var checkEdit = "";
+            var checkDelete = "";
+            var checkApproved = "";
+            var lstMenu = lstPermissions.Where(g => g.MenuID == item.ID);
+            if (lstMenu != null)
+            {
+                lstAction = lstMenu.Select(x => x.Action).ToList();
+                checkView = lstAction.Contains(EnumHelper.Action.View.ToString()) ? "checked" : "";
+                checkAdd = lstAction.Contains(EnumHelper.Action.Add.ToString()) ? "checked" : "";
+                checkEdit = lstAction.Contains(EnumHelper.Action.Edit.ToString()) ? "checked" : "";
+                checkDelete = lstAction.Contains(EnumHelper.Action.Delete.ToString()) ? "checked" : "";
+                checkApproved = lstAction.Contains(EnumHelper.Action.Approved.ToString()) ? "checked" : "";
+            }
+
+            <tr>
+                @Html.HiddenFor(g => item.ID, new { @class = "hdfAdminMenu" })
+                <td>@index</td>
+                <td>@Html.Raw(string.Concat(Enumerable.Repeat("--", item.Level)) + "&nbsp;" + item.Name)</td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" id="chkall_@(item.ID)" class="chkall">
+                        <label for="chkall_@(item.ID)"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" value="@((int)EnumHelper.Action.View)" id="view_@((int)EnumHelper.Action.View)@item.ID" @checkView>
+                        <label for="view_@((int)EnumHelper.Action.View)@item.ID"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" value="@((int)EnumHelper.Action.Add)" id="add_@((int)EnumHelper.Action.Add)@item.ID" @checkAdd>
+                        <label for="add_@((int)EnumHelper.Action.Add)@item.ID"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" value="@((int)EnumHelper.Action.Edit)" id="edit_@((int)EnumHelper.Action.Edit)@item.ID" @checkEdit>
+                        <label for="edit_@((int)EnumHelper.Action.Edit)@item.ID"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" value="@((int)EnumHelper.Action.Delete)" id="delete_@((int)EnumHelper.Action.Delete)@item.ID" @checkDelete>
+                        <label for="delete_@((int)EnumHelper.Action.Delete)@item.ID"></label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox checkbox-primary">
+                        <input type="checkbox" value="@((int)EnumHelper.Action.Approved)" id="approved_@((int)EnumHelper.Action.Approved)@item.ID" @checkApproved>
+                        <label for="approved_@((int)EnumHelper.Action.Approved)@item.ID"></label>
+                    </div>
+                </td>
+            </tr> 
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        groupuser.onupdatepermission(0);
+    });
+</script>

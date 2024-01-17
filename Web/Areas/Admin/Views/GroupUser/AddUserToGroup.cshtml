@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+@using Web.Model
+@model GroupUser
+<script src="/Admin/js/multiselect.min.js"></script>
+@using (Html.BeginForm("AddUserToGroup", "GroupUser", FormMethod.Post, new { id = "frmAddUser" }))
+{
+    <div class="row">
+        <div class="col-xs-5">
+            @Html.HiddenFor(g => g.ID)
+            <select name="from" id="multiselect" class="form-control" size="10" multiple="multiple">
+                @foreach (var user in (List<tbl_User>)ViewBag.LstUserUnAdd)
+                {
+                    <option value="@user.ID">@user.UserName</option>
+                }
+            </select>
+            <h5>Danh sách người dùng</h5>
+        </div>
+        <div class="col-xs-2">
+            <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+            <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+            <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+            <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+        </div>
+
+        <div class="col-xs-5">
+            <select name="to" id="multiselect_to" class="form-control" size="10" multiple="multiple">
+                @foreach (var user in (List<tbl_User>)ViewBag.LstUserAdded)
+                {
+                    <option value="@user.ID">@user.UserName</option>
+                }
+            </select>
+            <h5>Danh sách người dùng đã thêm</h5>
+        </div>
+    </div>
+    <div class="col-xs-12 text-right">
+        <button type="submit" id="btnSave" class="btn btn-primary">Lưu lại</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+    </div> 
+}
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#multiselect').multiselect();
+    });
+    AjaxService.POSTFORM("/Admin/GroupUser/AddUserToGroup", function (result) {
+        if (result.isSuccess == true) {
+            modal.hide();
+            alertmsg.success(result.messenger);
+        } else {
+            alertmsg.error(result.messenger);
+        }
+    });
+</script>

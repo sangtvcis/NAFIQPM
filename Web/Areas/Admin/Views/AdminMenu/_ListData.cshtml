@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+    int stt = (int)ViewBag.STT;
+}
+@model List<Web.Model.AdminMenu>
+<table class="table table-striped cabn_datatable">
+    <thead>
+        <tr>
+            <th style="width:30px">
+                <input type="hidden" id="hdfID" />
+                <div class="checkbox">
+                    <input id="chkall" type="checkbox">
+                    <label for="chkall"></label>
+                </div>
+            </th>
+            <th class="text-center">TT</th>
+            <th>Tên menu</th>
+            <th>Icon</th>
+            <th>Đường dẫn</th>
+            <th>Sắp xếp</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            stt++;
+            <tr>
+                <td style="vertical-align: middle;">
+                    <div class="checkbox">
+                        <input type="checkbox" value="@item.ID" id="chk'@item.ID'">
+                        <label for="chk'@item.ID'"></label>
+                    </div>
+                </td>
+                <td class="text-center">@stt</td>
+                <td style="vertical-align: middle;">@Html.Raw(string.Concat(Enumerable.Repeat("--", item.Level)) + "&nbsp" + item.Name)</td>
+                <td style="vertical-align: middle;"><i class="@item.Icon" style="font-size: 20px;"></i></td> 
+                <td style="vertical-align: middle;">@item.Url</td>
+                <td style="vertical-align: middle;">@item.ThuTu</td>
+                <td style="vertical-align: middle;">@Html.Raw(item.Active == true ? "<span style='color:green'>Kích hoạt</span>" : "<span style='color:red'>Vô hiệu</span>")</td>
+                <td style="vertical-align: middle;">
+                    <div class="btn-list pull-right mr5">
+                        @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("AdminMenu.Edit")))
+                        {
+                            <a href="#" class="btn btn-primary btn-bordered" onclick="adminmenu.loadfrmEdit(@item.ID) "><i class="glyphicon glyphicon-pencil"></i></a>
+                        }
+                       @*  @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("AdminMenu.Edit")))
+                        {
+                            <a href="#" class="btn btn-success btn-bordered" onclick="adminmenu.active(@item.ID) " title="@(item.Active ? "Vô hiệu" : "Kích hoạt" )">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        } *@
+                        @if (ViewBag.IsAdmin || (ViewBag.Roles != null && ViewBag.Roles.Contains("AdminMenu.Delete")))
+                        {
+                            <a href="#" class="btn btn-danger btn-bordered" onclick="adminmenu.ondelete(@item.ID) ">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        InitClickCheckAllInTable("chkall", function (res) {
+            $("#hdfID").val(res);
+        });
+        // $('.cabn_datatable').dataTable(
+        //     {
+        //         "oLanguage": {
+        //             "sUrl": "/Content/Vietnamese.json"
+        //         },
+        //     }
+        // );
+    });
+</script>

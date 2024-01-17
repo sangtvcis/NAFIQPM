@@ -1,0 +1,12 @@
+D:\NetCore\Web\Web.Model\bin\Debug\net6.0\Web.Model.deps.json
+D:\NetCore\Web\Web.Model\bin\Debug\net6.0\Web.Model.dll
+D:\NetCore\Web\Web.Model\bin\Debug\net6.0\Web.Model.pdb
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.csproj.AssemblyReference.cache
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.AssemblyInfoInputs.cache
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.AssemblyInfo.cs
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.csproj.CoreCompileInputs.cache
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.dll
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\refint\Web.Model.dll
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\Web.Model.pdb
+D:\NetCore\Web\Web.Model\obj\Debug\net6.0\ref\Web.Model.dll

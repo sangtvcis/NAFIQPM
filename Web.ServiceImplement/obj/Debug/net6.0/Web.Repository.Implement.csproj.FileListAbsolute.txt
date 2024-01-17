@@ -1,0 +1,17 @@
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Repository.Implement.deps.json
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Repository.Implement.dll
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Repository.Implement.pdb
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Model.dll
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Repository.dll
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Model.pdb
+D:\NetCore\Web\Web.ServiceImplement\bin\Debug\net6.0\Web.Repository.pdb
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.csproj.AssemblyReference.cache
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.GeneratedMSBuildEditorConfig.editorconfig
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.AssemblyInfoInputs.cache
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.AssemblyInfo.cs
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.csproj.CoreCompileInputs.cache
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.csproj.CopyComplete
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.dll
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\refint\Web.Repository.Implement.dll
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\Web.Repository.Implement.pdb
+D:\NetCore\Web\Web.ServiceImplement\obj\Debug\net6.0\ref\Web.Repository.Implement.dll

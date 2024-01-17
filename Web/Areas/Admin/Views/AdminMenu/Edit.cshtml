@@ -1,0 +1,104 @@
+﻿
+<link rel="stylesheet" href="/Content/Admin/assets/colorpicker/css/colorpicker.css" type="text/css" />
+<script type="text/javascript" src="/Content/Admin/assets/colorpicker/js/colorpicker.js"></script>
+<script src="/Content/Admin/assets/ckfinder/ckfinder.js"></script>
+@{
+    Layout = null;
+}
+@using Web.Model
+@model Web.Model.AdminMenu
+@using Web.Areas.Admin.Controllers
+@using (Html.AjaxBeginForm("Edit", "AdminMenu", new AjaxOptions
+ {
+     HttpMethod = "POST",
+     OnSuccess = "adminmenu.onSaveResult"
+ },
+    new { @id = "basicForm", @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(g=>g.ID)
+    @Html.HiddenFor(g=>g.Controller)
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tên menu<span class="asterisk"> *</span></label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(g => g.Name, new { @class = "form-control", placeholder = "Tên menu" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Menu cha</label>
+        @{
+            var lstmenu = (List<AdminMenu>)ViewBag.AdminMenu;
+    lstmenu.ForEach(g => g.Name = string.Concat(Enumerable.Repeat("--", g.Level)) + g.Name);
+        }
+        <div class="col-md-10">
+            @Html.DropDownListFor(x => x.ParentID, new SelectList(lstmenu, "ID", "Name"), "Chọn menu cha", new { @class = "form-control width300" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Đường dẫn<span class="asterisk"> *</span></label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(g => g.Url, new { @class = "form-control", placeholder = "Đường dẫn" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Thứ tự<span class="asterisk"> *</span></label>
+        <div class="col-sm-3">
+            @Html.TextBoxFor(g => g.ThuTu, new {@type="number", @class = "form-control", placeholder = "Thứ tự..."})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Icon</label>
+        <div class="col-sm-3">
+            @Html.TextBoxFor(g => g.Icon, new { @class = "form-control", placeholder = "class font"})
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 pull-right">
+            <div class="checkbox checkbox-primary">
+                <input id="Active" name="Active" type="checkbox" checked="" value="true">
+                <label for="Active">
+                    Kích hoạt
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary waves-effect waves-light">Cập nhật</button>
+    </div>
+}
+<script>
+    // Basic Form
+    $(document).ready(function () {
+        $("#basicForm").validate({
+            rules:
+        {
+            Name:
+            {
+                required: true
+            },
+            Ordering:
+            {
+                required: true
+            },
+            Url:
+            {
+                required: true
+            }
+        },
+            messages:
+            {
+                Name:
+                {
+                    required: "Chưa nhập tên menu"
+                },
+                Ordering:
+               {
+                   required: "Thứ tự không để trống"
+               },
+                Url:
+               {
+                   required: "Đường dẫn không để trống"
+               }
+            }
+        });
+    });
+</script>
